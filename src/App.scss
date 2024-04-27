@@ -1,0 +1,276 @@
+// 1. Use of Variables
+// Define variables
+$font-stack: Helvetica, sans-serif;
+$primary-color: #007bff;
+$font-size: 16px;
+
+// Usage of variables
+.variable-btn {
+	font: 100% $font-stack;
+	color: $primary-color;
+}
+
+// * if we update at defined state then it updates in the whole application
+
+// --------------------------------------------------------------------------------
+
+// 2. Variable Scope
+$headerColor: #003cff;
+
+// Usage of variable scope
+h1 {
+	$headerColor: #00ff73;
+	color: $headerColor; // h1 color will be #00ff73
+}
+h3 {
+	color: $headerColor; // h3 color will be #003cff
+}
+
+// --------------------------------------------------------------------------------
+
+// 3. ! Global
+$btnColor: #003cff;
+
+// Usage
+.btn-global-1 {
+	$btnColor: #00ff73 !global;
+	background-color: $btnColor; // btn-global-1 color will be #00ff73 (Overrides the btnColor value )
+}
+.btn-global-2 {
+	background-color: $btnColor; // btn-global-1 color will be #00ff73
+}
+// --------------------------------------------------------------------------------
+
+// 4. ! Default
+$btnColor: #ffff00;
+
+// Usage
+.btn-default-1 {
+	$btnColor: #00ff73 !default;
+	background-color: $btnColor; // btn-default-1 color will be #ffff00
+}
+.btn-default-2 {
+	background-color: $btnColor; // btn-default-1 color will be #ffff00
+}
+// --------------------------------------------------------------------------------
+
+// 5. Interpolation
+
+$prefix: "btn";
+$primary-color: #28a745;
+$secondary-color: #17a2b8;
+
+.#{$prefix}-primary {
+	background-color: $primary-color;
+}
+.#{$prefix}-secondary {
+	background-color: $secondary-color;
+}
+// --------------------------------------------------------------------------------
+
+// 6. Nested Rules
+
+// SASS Code:
+.container {
+	width: 100%;
+	.header {
+		background-color: #007bff;
+		color: #fff;
+		h1 {
+			font-size: 24px;
+			margin: 0;
+			padding: 10px;
+		}
+	}
+	.content {
+		padding: 20px;
+		p {
+			font-size: 16px;
+			border: 2px solid red;
+		}
+	}
+	.footer {
+		background-color: #0080ff;
+		text-align: center;
+		p {
+			margin: 0;
+			padding: 10px;
+		}
+	}
+}
+
+/*
+Normal CSS Code:
+.container {
+    width: 100%;
+}
+
+.container .header {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.container .header h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+}
+
+.container .content {
+    padding: 20px;
+}
+
+.container .content p {
+    font-size: 16px;
+}
+
+.container .footer {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.container .footer p {
+    margin: 0;
+    padding: 10px;
+}
+
+*/
+
+// --------------------------------------------------------------------------------
+
+// 7. Nested Properties
+
+// SASS Code
+.nested-properties {
+	font: {
+		family: Arial, sans-serif;
+		size: 22px;
+		weight: bold;
+	}
+}
+
+/*
+// Normal CSS Code:
+.nested-properties {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+}
+*/
+
+// --------------------------------------------------------------------------------
+
+// 8. using @import
+
+@import "variables";
+
+.header {
+	background-color: $variable-primary;
+	color: $variable-secondary;
+	font-family: $variable-font-family;
+}
+
+.button {
+	background-color: $variable-primary;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+// --------------------------------------------------------------------------------
+
+// 9. SASS @mixin
+
+@mixin danger-text {
+	background-color: red;
+}
+
+// Usage
+.danger-class {
+	@include danger-text;
+	text-align: center;
+	color: whitesmoke;
+}
+
+// --------------------------------------------------------------------------------
+
+// 10. Passing Variables
+
+@mixin borderTag($color, $width) {
+	border: $width solid $color;
+}
+
+//Usage
+.border-class {
+	@include borderTag(green, 2px);
+	width: 75%;
+	height: 10%;
+}
+
+// --------------------------------------------------------------------------------
+
+// 11. @extend Directive
+
+.btn {
+	display: inline-block;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.btn-primary-extend {
+	@extend .btn;
+	background-color: #007bff;
+	color: white;
+}
+
+.btn-secondary-extend {
+	@extend .btn;
+	background-color: #6c757d;
+	color: white;
+}
+/*
+// Normal CSS COde:
+.btn, .btn-primary-extend, .btn-secondary-extend {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary-extend {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-secondary-extend {
+  background-color: #6c757d;
+  color: white;
+}
+*/
+
+// --------------------------------------------------------------------------------
+
+// 12. Complex Values
+$font-sizes: (
+	small: 12px,
+	medium: 16px,
+	large: 20px,
+);
+
+.text-small {
+	font-size: map-get($font-sizes, small);
+}
+.text-medium {
+	font-size: map-get($font-sizes, medium);
+}
+.text-large {
+	font-size: map-get($font-sizes, large);
+}
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
